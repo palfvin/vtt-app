@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import Chart from 'chart.js'
+import {processVtt} from './vtt-processor'
+import {mapToDataset} from './map-charter'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const onChange = (event: any) => {
+        const file = (event.target as HTMLInputElement).files![0]
+        const reader = new FileReader()
+        reader.addEventListener('load', (event) => {
+            let vttString = event.target!.result as String
+            const resultMap = processVtt(vttString)
+            const data = mapToDataset(resultMap)
+            const ctx = (document.getElementById('myChart')! as HTMLCanvasElement).getContext('2d')!
+            new Chart(ctx, {
+                type: 'bar',
+                data: data
+            });
+        })
+        reader.readAsText(file)
+    }
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                VTT File Processor
+            </header>
+            <canvas id="myChart"></canvas>
+            <input
+                type='file'
+                onChange={onChange}
+            ></input>
+        </div>
+    )
 }
 
-export default App;
+export default App
