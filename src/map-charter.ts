@@ -45,7 +45,9 @@ export const resultsToData = (vttResults: Array<VttResult>, processFilesOptions:
         backgroundColor: '#000000'
     }]
     const base = processFilesOptions.individualMeetings ? datasets : []
-    const allDataSets = base.concat(averageBasedOnAllSessions).concat(averageBasedOnSessionsParticipatedIn)
+    const avgAll = vttResults.length > 1 ? averageBasedOnAllSessions : []
+    const avgPart = vttResults.length > 1 ? averageBasedOnSessionsParticipatedIn : []
+    const allDataSets = base.concat(avgAll).concat(avgPart)
     return ({
         datasets: allDataSets,
         labels: sortedUniqueKeys
