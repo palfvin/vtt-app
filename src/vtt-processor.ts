@@ -1,13 +1,17 @@
 import Moment from 'moment'
+import {VttFile} from './process-files'
 
-export const processVtt = (contents: String): Map<string, number> => {
-    const lines = contents.split("\n")
-    const result = new Map<string, number>()
+export type VttMap = Map<string, number>
+export type VttResult = {filename: string, map: VttMap}
+
+export const processVtt = (vttFile: VttFile): VttResult => {
+    const lines = vttFile.contents.split("\n")
+    const result: VttMap = new Map()
     var i,chunk = 4;
     for (i=3; i<lines.length; i+=chunk) {
         const timeRange= lines[i]
         const speakerTranscript = lines[i+1]
-        const [_, start, end] = timeRange.match(/(\d\d:\d\d:\d\d)\.\d{3} --> (\d\d:\d\d:\d\d)\.\d{3}/)!
+        const [start, end] = timeRange.match(/(\d\d:\d\d:\d\d)\.\d{3} --> (\d\d:\d\d:\d\d)\.\d{3}/)!.slice(1,3)
         const startTime = Moment(start, 'HH:mm:ss')
         const endTime = Moment(end, 'HH:mm:ss')
         const duration = endTime.diff(startTime, 'seconds')
@@ -17,5 +21,5 @@ export const processVtt = (contents: String): Map<string, number> => {
         const currentTimeTotal = result.get(speaker) || 0
         result.set(speaker, currentTimeTotal + duration)
     }
-    return result
+    return {filename: vttFile.filename, map: result}
 }
