@@ -4,7 +4,7 @@ import App from './App';
 
 test('renders input field', () => {
   render(<App />);
-  const inputElement = screen.getByLabelText('Select a .vtt file')
+  const inputElement = screen.getByLabelText('Select .vtt file(s)')
   expect(inputElement).toBeInTheDocument();
 
 });

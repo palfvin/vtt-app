@@ -17,7 +17,7 @@ Danny Burkes: I mean, our approach air is very specifically delay as long as pos
 
 57
 00:07:55.560 --> 00:08:05.700
-Shaun Anderson: And it fits, not just with visual design for the for the UI. So because a lot of the software we work on doesn't have you eyes, but it's you kind of idea. There's different ways of
+Shaun Anderson: And it fits, not just with visual design for: the for the UI. So because a lot of the software we work on doesn't have you eyes, but it's you kind of idea. There's different ways of
 
 58
 00:08:06.090 --> 00:08:20.130
@@ -29,13 +29,13 @@ Joe Moore: Now the interesting thing about just taking that approach from the be
 
 60
 00:08:28.290 --> 00:08:43.830
-Joe Moore: Kind of common you would like was like, especially when you like combine some of the principles like starting simple with embracing change when you build that in early, then it can get the team in used to a cadence of of constant change.
+Joe Moore: Kind of common you would like was like, especially when you like: combine some of the principles like starting simple with embracing change when you build that in early, then it can get the team in used to a cadence of of constant change.
 
 61
 00:08:44.940 --> 00:08:51.810
 Joe Moore: You know, I think that there there can be a world where they were. Someone says, like, we're gonna we're going to map out this entire architecture and map out. I "
 expect(true).toBe(false)
 `
-    const result = processVtt(input)
-    expect(result).toEqual(new Map([['Danny Burkes', 13], ['Joe Moore', 28], ['Shaun Anderson', 24]]))
+    const result = processVtt({filename: 'test', contents: input})
+    expect(result.map).toEqual(new Map([['Danny Burkes', 13], ['Joe Moore', 28], ['Shaun Anderson', 24]]))
 })

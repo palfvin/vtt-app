@@ -15,7 +15,7 @@ export const processVtt = (vttFile: VttFile): VttResult => {
         const startTime = Moment(start, 'HH:mm:ss')
         const endTime = Moment(end, 'HH:mm:ss')
         const duration = endTime.diff(startTime, 'seconds')
-        const speakerMatches = speakerTranscript.match(/^(.*):/)
+        const speakerMatches = speakerTranscript.match(/^(.*?):/)
         if (speakerMatches == null) continue
         const speaker: string = speakerMatches[1]
         const currentTimeTotal = result.get(speaker) || 0
