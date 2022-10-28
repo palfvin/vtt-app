@@ -1,6 +1,6 @@
 import {processVtt} from './vtt-processor'
 import {resultsToData} from './map-charter'
-import Chart from 'chart.js'
+import {Chart} from 'chart.js'
 
 export type VttFile = {filename: string, contents: string}
 
