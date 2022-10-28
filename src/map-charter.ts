@@ -37,11 +37,7 @@ export const resultsToData = (vttResults: Array<VttResult>, processFilesOptions:
     }]
     const averageBasedOnSessionsParticipatedIn = [{
         label: 'Average When Present',
-        data: sortedUniqueKeys.map(k => {
-            const result = sumOfPercentages.find(pair => pair[0] === k)![1]/new Map(totalSessions).get(k)!
-            console.log(k, result)
-            return result
-        }),
+        data: sortedUniqueKeys.map(k => sumOfPercentages.find(pair => pair[0] === k)![1] / new Map(totalSessions).get(k)!),
         backgroundColor: '#000000'
     }]
     const base = processFilesOptions.individualMeetings ? datasets : []
